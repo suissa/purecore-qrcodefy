@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>📱 QRCodefy - The only QR Code library you'll ever need</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-primary: #0a0a0a;
+      --bg-secondary: #111111;
+      --bg-card: #161616;
+      --bg-code: #1a1a1a;
+      --text-primary: #f5f5f5;
+      --text-secondary: #a0a0a0;
+      --text-muted: #666666;
+      --accent-purple: #a855f7;
+      --accent-blue: #3b82f6;
+      --accent-green: #22c55e;
+      --accent-yellow: #eab308;
+      --accent-orange: #f97316;
+      --accent-red: #ef4444;
+      --border-color: #262626;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      padding: 4rem 0;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 3rem;
+    }
+
+    header h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+    }
+
+    header .tagline {
+      font-size: 2.25rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      color: var(--accent-yellow);
+    }
+
+    /* Navigation */
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      border: 1px solid var(--border-color);
+      font-size: 0.875rem;
+      transition: all 0.2s ease;
+    }
+
+    nav a:hover {
+      color: var(--text-primary);
+      border-color: var(--accent-purple);
+      background: rgba(168, 85, 247, 0.1);
+    }
+
+    /* Sections */
+    section {
+      margin-bottom: 4rem;
+    }
+
+    h2 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin: 2rem 0 1rem;
+      color: var(--text-primary);
+    }
+
+    h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin: 1.5rem 0 0.75rem;
+      color: var(--accent-purple);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    p {
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+    }
+
+    strong {
+      color: var(--text-primary);
+    }
+
+    /* Feature Cards */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.25rem;
+      transition: all 0.2s ease;
+    }
+
+    .feature-card:hover {
+      border-color: var(--accent-purple);
+      transform: translateY(-2px);
+    }
+
+    .feature-card .icon {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .feature-card h4 {
+      font-size: 0.9rem;
+      margin: 0 0 0.5rem;
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+    }
+
+    .feature-card p {
+      font-size: 0.85rem;
+      margin: 0;
+      color: var(--text-muted);
+    }
+
+    /* Code Blocks */
+    pre {
+      background: var(--bg-code);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.25rem;
+      overflow-x: auto;
+      margin: 1rem 0;
+    }
+
+    code {
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      font-size: 0.875rem;
+      line-height: 1.6;
+    }
+
+    pre code {
+      color: var(--text-secondary);
+    }
+
+    .code-comment {
+      color: var(--text-muted);
+    }
+
+    .code-keyword {
+      color: var(--accent-purple);
+    }
+
+    .code-string {
+      color: var(--accent-green);
+    }
+
+    .code-function {
+      color: var(--accent-blue);
+    }
+
+    .code-const {
+      color: var(--accent-orange);
+    }
+
+    /* Inline Code */
+    p code, li code, td code {
+      background: var(--bg-code);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      color: var(--accent-purple);
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 0.9rem;
+    }
+
+    th, td {
+      padding: 0.75rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    th {
+      background: var(--bg-card);
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    td {
+      color: var(--text-secondary);
+    }
+
+    tr:hover td {
+      background: var(--bg-card);
+    }
+
+    /* Integration Cards */
+    .integration {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .integration h3 {
+      margin-top: 0;
+      color: var(--accent-blue);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 3rem 0;
+      border-top: 1px solid var(--border-color);
+      margin-top: 4rem;
+    }
+
+    footer p {
+      margin-bottom: 1rem;
+    }
+
+    footer a {
+      color: var(--accent-purple);
+      text-decoration: none;
+      font-weight: 500;
+      transition: opacity 0.2s;
+    }
+
+    footer a:hover {
+      opacity: 0.8;
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      header h1 {
+        font-size: 2.5rem;
+      }
+
+      .container {
+        padding: 2rem 1rem;
+      }
+
+      pre {
+        padding: 1rem;
+        font-size: 0.8rem;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+      }
+      }
+      .logo {
+        width: 70%;
+        margin: 0 auto;
+      }
+      .logo2 {
+        width: 70%;
+        margin: 0 auto;
+        position: relative;
+        top: -50px;
+      }
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg-secondary);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--border-color);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <img src="https://i.imgur.com/Tr5F6XV.png" alt="PureCore Logo" class="logo">
+      <img src="https://i.imgur.com/yh8Aqev.png" alt="QRCodefy Logo" class="logo2">
+      <p class="tagline">The only QR Code library you'll ever need.</p>
+      <nav>
+        <a href="#installation">Installation</a>
+        <a href="#quick-start">Quick Start</a>
+        <a href="#integrations">Integrations</a>
+        <a href="#api">API Reference</a>
+      </nav>
+    </header>
+
+    <section id="why">
+      <h2>🎯 Why QRCodefy?</h2>
+      <p>Tired of complex libraries that fail to render in terminal or generate corrupted files?</p>
+      <p><strong>QRCodefy solves this.</strong> Designed with Chatbot, Automation, and CLI developers in mind, it bridges the gap between receiving a hash/Base64 and delivering it where you need: on screen or on disk.</p>
+      
+      <div class="features">
+        <div class="feature-card">
+          <div class="icon">🎯</div>
+          <h4>Base64 & String Focus</h4>
+          <p>Perfect for APIs that return QR as text</p>
+        </div>
+        <div class="feature-card">
+          <div class="icon">🖥️</div>
+          <h4>Terminal First</h4>
+          <p>Beautiful console rendering (essential for VPS server logs)</p>
+        </div>
+        <div class="feature-card">
+          <div class="icon">💾</div>
+          <h4>File System</h4>
+          <p>Save to PNG/SVG with one line of code</p>
+        </div>
+        <div class="feature-card">
+          <div class="icon">🤖</div>
+          <h4>Bot Ready</h4>
+          <p>Perfect companion for Baileys, EvolutionAPI and WhatsApp-Web.js</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="installation">
+      <h2>📦 Installation</h2>
+      <pre><code><span class="code-comment"># npm</span>
+<span class="code-function">npm</span> install qrcodefy
+
+<span class="code-comment"># yarn</span>
+<span class="code-function">yarn</span> add qrcodefy
+
+<span class="code-comment"># bun</span>
+<span class="code-function">bun</span> add qrcodefy</code></pre>
+    </section>
+
+    <section id="quick-start">
+      <h2>🚀 Quick Start</h2>
+      
+      <h3>CLI Usage</h3>
+      <p>Don't want to write code? Use directly in terminal:</p>
+      <pre><code><span class="code-comment"># Generate in terminal</span>
+<span class="code-function">npx</span> qrcodefy <span class="code-string">"YourBase64OrTextHere"</span> terminal
+
+<span class="code-comment"># Save to file</span>
+<span class="code-function">npx</span> qrcodefy <span class="code-string">"YourBase64OrTextHere"</span> ./qrcode.png</code></pre>
+
+      <h3>Programmatic Usage</h3>
+      <pre><code><span class="code-keyword">import</span> { QRCodefy } <span class="code-keyword">from</span> <span class="code-string">'qrcodefy'</span>;
+
+<span class="code-keyword">const</span> <span class="code-const">qr</span> = <span class="code-keyword">new</span> <span class="code-function">QRCodefy</span>(<span class="code-string">'https://example.com'</span>);
+
+<span class="code-comment">// Render in terminal</span>
+<span class="code-keyword">await</span> qr.<span class="code-function">toTerminal</span>();
+
+<span class="code-comment">// Save to file</span>
+<span class="code-keyword">await</span> qr.<span class="code-function">toFile</span>(<span class="code-string">'./qrcode.png'</span>);
+
+<span class="code-comment">// Get as Data URL (for HTML &lt;img&gt;)</span>
+<span class="code-keyword">const</span> <span class="code-const">dataUrl</span> = <span class="code-keyword">await</span> qr.<span class="code-function">toDataURL</span>();</code></pre>
+    </section>
+
+    <section id="integrations">
+      <h2>💡 Integrations</h2>
+      <p>Here's where QRCodefy shines. See how it integrates seamlessly with the most popular WhatsApp libraries.</p>
+
+      <div class="integration">
+        <h3>1. With @whiskeysockets/baileys</h3>
+        <p>Baileys emits a raw connection string. QRCodefy instantly transforms it into a scannable QR in your log.</p>
+        <pre><code><span class="code-keyword">import</span> { makeWASocket, useMultiFileAuthState } <span class="code-keyword">from</span> <span class="code-string">'@whiskeysockets/baileys'</span>;
+<span class="code-keyword">import</span> { QRCodefy } <span class="code-keyword">from</span> <span class="code-string">'qrcodefy'</span>;
+
+<span class="code-keyword">async function</span> <span class="code-function">connectToWhatsApp</span>() {
+  <span class="code-keyword">const</span> { state, saveCreds } = <span class="code-keyword">await</span> <span class="code-function">useMultiFileAuthState</span>(<span class="code-string">'auth_info_baileys'</span>);
+  <span class="code-keyword">const</span> <span class="code-const">sock</span> = <span class="code-function">makeWASocket</span>({ auth: state });
+
+  sock.ev.<span class="code-function">on</span>(<span class="code-string">'connection.update'</span>, <span class="code-keyword">async</span> (update) => {
+    <span class="code-keyword">const</span> { connection, lastDisconnect, qr } = update;
+
+    <span class="code-keyword">if</span> (qr) {
+      <span class="code-comment">// 🔥 THE MAGIC HAPPENS HERE</span>
+      console.<span class="code-function">log</span>(<span class="code-string">'Scan the QR Code below:'</span>);
+      <span class="code-keyword">const</span> <span class="code-const">qrcode</span> = <span class="code-keyword">new</span> <span class="code-function">QRCodefy</span>(qr);
+      <span class="code-keyword">await</span> qrcode.<span class="code-function">toTerminal</span>(<span class="code-keyword">true</span>);
+    }
+  });
+}</code></pre>
+      </div>
+
+      <div class="integration">
+        <h3>2. With EvolutionAPI (Webhooks)</h3>
+        <p>If you have a backend consuming EvolutionAPI, you often receive the QR Code Base64 via JSON. Use QRCodefy to save it as an image.</p>
+        <pre><code><span class="code-keyword">import</span> express <span class="code-keyword">from</span> <span class="code-string">'express'</span>;
+<span class="code-keyword">import</span> { QRCodefy } <span class="code-keyword">from</span> <span class="code-string">'qrcodefy'</span>;
+
+<span class="code-keyword">const</span> <span class="code-const">app</span> = <span class="code-function">express</span>();
+app.<span class="code-function">use</span>(express.<span class="code-function">json</span>());
+
+app.<span class="code-function">post</span>(<span class="code-string">'/webhook/evolution'</span>, <span class="code-keyword">async</span> (req, res) => {
+  <span class="code-keyword">const</span> { event, data } = req.body;
+
+  <span class="code-keyword">if</span> (event === <span class="code-string">'qrcode.updated'</span> && data.qrcode) {
+    <span class="code-keyword">const</span> <span class="code-const">qrManager</span> = <span class="code-keyword">new</span> <span class="code-function">QRCodefy</span>(data.qrcode);
+    
+    <span class="code-comment">// Show in server log</span>
+    <span class="code-keyword">await</span> qrManager.<span class="code-function">toTerminal</span>();
+
+    <span class="code-comment">// Save to public folder</span>
+    <span class="code-keyword">await</span> qrManager.<span class="code-function">toFile</span>(<span class="code-string">'./public/qrcodes/session.png'</span>);
+  }
+  
+  res.<span class="code-function">sendStatus</span>(<span class="code-const">200</span>);
+});</code></pre>
+      </div>
+
+      <div class="integration">
+        <h3>3. With WhatsApp-Web.js</h3>
+        <pre><code><span class="code-keyword">import</span> { Client } <span class="code-keyword">from</span> <span class="code-string">'whatsapp-web.js'</span>;
+<span class="code-keyword">import</span> { QRCodefy } <span class="code-keyword">from</span> <span class="code-string">'qrcodefy'</span>;
+
+<span class="code-keyword">const</span> <span class="code-const">client</span> = <span class="code-keyword">new</span> <span class="code-function">Client</span>();
+
+client.<span class="code-function">on</span>(<span class="code-string">'qr'</span>, <span class="code-keyword">async</span> (qr) => {
+  console.<span class="code-function">log</span>(<span class="code-string">'📱 Scan this QR Code:'</span>);
+  <span class="code-keyword">const</span> <span class="code-const">qrcode</span> = <span class="code-keyword">new</span> <span class="code-function">QRCodefy</span>(qr);
+  <span class="code-keyword">await</span> qrcode.<span class="code-function">toTerminal</span>();
+  <span class="code-keyword">await</span> qrcode.<span class="code-function">toFile</span>(<span class="code-string">'./public/whatsapp-qr.png'</span>);
+});
+
+client.<span class="code-function">initialize</span>();</code></pre>
+      </div>
+    </section>
+
+    <section id="api">
+      <h2>📚 API Reference</h2>
+
+      <h3>Constructor</h3>
+      <h4>new QRCodefy(data: string, options?: QRCodeOptions)</h4>
+      <p>Instantiates the class with data (Text, URL, or Base64).</p>
+      
+      <table>
+        <thead>
+          <tr>
+            <th>Parameter</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>data</code></td>
+            <td><code>string</code></td>
+            <td>The content to encode (URL, text, or Base64)</td>
+          </tr>
+          <tr>
+            <td><code>options</code></td>
+            <td><code>object</code></td>
+            <td>Optional configuration</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Methods</h3>
+
+      <h4>toTerminal(small?: boolean): Promise&lt;void&gt;</h4>
+      <p>Renders the QR Code using ANSI/ASCII characters.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Parameter</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>small</code></td>
+            <td><code>boolean</code></td>
+            <td><code>true</code></td>
+            <td>Use <code>false</code> if QR Code is too dense/large</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h4>toFile(path: string): Promise&lt;void&gt;</h4>
+      <p>Saves the image to disk. Format is detected by extension.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Parameter</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>path</code></td>
+            <td><code>string</code></td>
+            <td>File path with extension (<code>.png</code>, <code>.svg</code>)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h4>toDataURL(): Promise&lt;string&gt;</h4>
+      <p>Returns the string formatted as <code>data:image/png;base64,...</code> ready to be placed in an HTML <code>&lt;img src="..." /&gt;</code> tag.</p>
+    </section>
+
+    <section id="config">
+      <h2>🔧 Configuration Options</h2>
+      <pre><code><span class="code-keyword">const</span> <span class="code-const">qr</span> = <span class="code-keyword">new</span> <span class="code-function">QRCodefy</span>(<span class="code-string">'data'</span>, {
+  errorCorrectionLevel: <span class="code-string">'M'</span>, <span class="code-comment">// L, M, Q, H</span>
+  margin: <span class="code-const">4</span>,
+  width: <span class="code-const">256</span>,
+  color: {
+    dark: <span class="code-string">'#000000'</span>,
+    light: <span class="code-string">'#ffffff'</span>
+  }
+});</code></pre>
+    </section>
+
+    <section id="license">
+      <h2>📝 License</h2>
+      <p>This project is under the <strong>MIT License</strong>. Feel free to use in your personal and commercial projects.</p>
+    </section>
+
+    <footer>
+      <p>Made with 💜 for the Bot Developer Community</p>
+      <a href="https://github.com/purecore">⭐ Star us on GitHub</a>
+    </footer>
+  </div>
+</body>
+</html>
+
