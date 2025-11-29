@@ -1,9 +1,9 @@
 <p align="center">
-  <img src="https://i.imgur.com/Tr5F6XV.png" alt="PureCore Logo" width="400">
+  <img src="https://i.imgur.com/Tr5F6XV.png" alt="PureCore Logo" width="600">
 </p>
 
-<p align="center">
-  <img src="https://i.imgur.com/yh8Aqev.png" alt="QRCodefy Logo" width="350">
+<p align="center" style="position: relative; top: -60px">
+  <img src="https://i.imgur.com/yh8Aqev.png" alt="QRCodefy Logo" width="600">
 </p>
 
 <h3 align="center">
