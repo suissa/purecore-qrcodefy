@@ -1,13 +1,13 @@
 <div style="width: 100%; max-width: 900px; margin: 0 auto; padding: 20px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); color: #f5f5f5; border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
   
   <!-- Header Section -->
-  <div style="text-align: center; padding: 40px 20px; border-bottom: 1px solid #333;">
+  <div style="background-color: #000; text-align: center; padding: 40px 20px; border-bottom: 1px solid #333;">
     <img src="https://i.imgur.com/Tr5F6XV.png" alt="PureCore Logo" style="width: min(300px, 60%); margin-bottom: 20px;">
     <img src="https://i.imgur.com/yh8Aqev.png" alt="QRCodefy Logo" style="width: min(250px, 50%); margin-top: -30px;">
     <h1 style="font-size: 2.5rem; font-weight: 700; margin: 20px 0; background: linear-gradient(135deg, #a855f7, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">📱 QRCodefy</h1>
     <p style="font-size: 1.2rem; color: #eab308; margin: 10px 0; font-weight: 600;">The only QR Code library you'll ever need.</p>
     
-  <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-top: 30px;">
+  <div style="background-color: #000; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-top: 30px;">
       <a href="#installation" style="color: #a0a0a0; text-decoration: none; padding: 8px 16px; border: 1px solid #333; border-radius: 20px; font-size: 0.9rem; transition: all 0.2s;">📦 Installation</a>
       <a href="#quick-start" style="color: #a0a0a0; text-decoration: none; padding: 8px 16px; border: 1px solid #333; border-radius: 20px; font-size: 0.9rem; transition: all 0.2s;">🚀 Quick Start</a>
       <a href="#integrations" style="color: #a0a0a0; text-decoration: none; padding: 8px 16px; border: 1px solid #333; border-radius: 20px; font-size: 0.9rem; transition: all 0.2s;">💡 Integrations</a>
@@ -16,12 +16,12 @@
   </div>
 
   <!-- Why QRCodefy Section -->
-  <div style="padding: 40px 20px; text-align: center; border-bottom: 1px solid #333;">
+  <div style="background-color: #000; padding: 40px 20px; text-align: center; border-bottom: 1px solid #333;">
     <h2 style="font-size: 2rem; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; gap: 10px;">🎯 Why QRCodefy?</h2>
     <p style="color: #a0a0a0; margin-bottom: 10px; line-height: 1.6;">Tired of complex libraries that fail to render in terminal or generate corrupted files?</p>
     <p style="color: #f5f5f5; font-weight: 600; margin-bottom: 30px;"><strong>QRCodefy solves this.</strong> Designed with Chatbot, Automation, and CLI developers in mind, it bridges the gap between receiving a hash/Base64 and delivering it where you need: on screen or on disk.</p>
     
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 30px;">
+  <div style="background-color: #000; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 30px;">
       <div style="background: #1a1a1a; border: 1px solid #333; border-radius: 12px; padding: 20px; transition: all 0.2s;">
         <div style="font-size: 2rem; margin-bottom: 10px;">🎯</div>
         <h4 style="color: #f5f5f5; margin: 0 0 10px; font-family: 'Inter', sans-serif;">Base64 & String Focus</h4>
@@ -46,7 +46,7 @@
   </div>
 
   <!-- Installation Section -->
-  <div id="installation" style="padding: 40px 20px; border-bottom: 1px solid #333;">
+  <div id="installation" style="background-color: #000; padding: 40px 20px; border-bottom: 1px solid #333;">
     <h2 style="font-size: 2rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">📦 Installation</h2>
     <pre style="background: #1a1a1a; border: 1px solid #333; border-radius: 12px; padding: 20px; overflow-x: auto; margin: 20px 0;"><code style="font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: #a0a0a0;"># npm
 npm install qrcodefy
@@ -59,7 +59,7 @@ bun add qrcodefy</code></pre>
   </div>
 
   <!-- Quick Start Section -->
-  <div id="quick-start" style="padding: 40px 20px; border-bottom: 1px solid #333;">
+  <div id="quick-start" style="background-color: #000; padding: 40px 20px; border-bottom: 1px solid #333;">
     <h2 style="font-size: 2rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">🚀 Quick Start</h2>
     
   <h3 style="font-size: 1.5rem; margin: 30px 0 15px; color: #3b82f6;">CLI Usage</h3>
